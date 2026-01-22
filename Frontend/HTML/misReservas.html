@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mis Reservas — RodaVía</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/estilosIndex.css">
+  <style>
+    .reservas-list{ display:flex; flex-direction:column; gap:12px }
+    .res-card{ padding:12px; border-radius:10px; background:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.04); display:flex; gap:12px; align-items:center }
+    .res-card img{ width:140px; height:88px; object-fit:cover; border-radius:8px }
+    .btn-cancel{ background:#ef233c; color:#fff; border:none; padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700 }
+    .res-meta{ flex:1 }
+    .res-right{ text-align:right }
+    /* Toasts */
+    #toastContainer{ position:fixed; right:20px; bottom:20px; z-index:9999; display:flex; flex-direction:column; gap:10px; align-items:flex-end }
+    .toast{ min-width:160px; padding:10px 14px; border-radius:10px; color:#fff; box-shadow:0 8px 24px rgba(0,0,0,0.18); opacity:0; transform:translateY(8px); transition:opacity .18s, transform .18s }
+    .toast.show{ opacity:1; transform:translateY(0) }
+    .toast.success{ background: linear-gradient(90deg,#2d9f6a,#1f7a4e) }
+    .toast.error{ background: linear-gradient(90deg,#ef233c,#b71c1c) }
+  </style>
+</head>
+<body>
+
+<script src="../JS/commonHeader.js"></script>
+
+<main class="container" style="padding:22px">
+  <h1>Mis Reservas</h1>
+  <div id="reservasList" class="reservas-list"></div>
+</main>
+
+<div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+  <!-- Modal de confirmación personalizado -->
+  <div id="confirmModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-box">
+      <h3 id="confirmTitle">Confirmar acción</h3>
+      <p id="confirmMessage">¿Estás seguro?</p>
+      <div class="modal-actions">
+        <button id="confirmCancel" class="btn-cancel" type="button">Cancelar</button>
+        <button id="confirmOk" class="btn-confirm" type="button">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* overlay hidden by default via opacity/pointer-events; toggling .open will animate */
+    .modal-overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; z-index:10000; opacity:0; pointer-events:none; transition:opacity .22s ease }
+    .modal-overlay.open{ opacity:1; pointer-events:auto }
+
+    .modal-box{ background:#fff; padding:18px; border-radius:12px; width:320px; max-width:90%; box-shadow:0 12px 40px rgba(0,0,0,0.25); text-align:left; transform:translateY(8px) scale(.98); opacity:0; transition:transform .22s cubic-bezier(.2,.9,.25,1), opacity .18s }
+    .modal-overlay.open .modal-box{ transform:translateY(0) scale(1); opacity:1 }
+
+    .modal-box h3{ margin:0 0 8px 0 }
+    .modal-box p{ margin:0 0 12px 0; color:#444 }
+    .modal-actions{ display:flex; gap:10px; justify-content:flex-end }
+    .btn-confirm{ background: linear-gradient(90deg,#4caf50,#2eae3f); color:#fff; border:none; padding:8px 12px; border-radius:8px; font-weight:700; cursor:pointer }
+    .btn-cancel{ background:#ddd; color:#222; border:none; padding:8px 12px; border-radius:8px; cursor:pointer }
+  </style>
+
+<script src="../JS/misReservas.js"></script>
+</body>
+</html>

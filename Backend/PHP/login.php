@@ -18,13 +18,15 @@ $user = $result->fetch_assoc();
 
 if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user'] = [
+        'id_usuario' => $user['id_usuario'],
         'email' => $user['email'],
         'rol' => $user['rol']
     ];
 
     echo json_encode([
         'success' => true,
-        'rol' => $user['rol']
+        'rol' => $user['rol'],
+        'id_usuario' => $user['id_usuario']
     ]);
 } else {
     echo json_encode([

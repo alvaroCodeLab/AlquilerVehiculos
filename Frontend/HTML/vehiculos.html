@@ -1,102 +1,46 @@
 <!doctype html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vehículos — RodaVía</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/vehiculos.css">
-  </head>
-  <body>
-    <header class="nav">
-      <div class="container nav-inner">
-        <div class="brand">
-          <img src="../../SRC/IMG/logoRodaVía-removebg-preview.png" width="84" alt="RodaVía logo">
-          <span class="brand-name">Roda<span class="accent">Vía</span></span>
-        </div>
-        <nav class="nav-links">
-          <a href="../HTML/index.html">Inicio</a>
-          <a href="#">Vehículos</a>
-          <a href="../HTML/registro.html" class="btn-ghost">Registrarse</a>
-        </nav>
-      </div>
-    </header>
+    <title>Vehículos | RodaVía</title>
+    <link href="../../SRC/IMG/favicom/website_icon_white.png" rel="website icon" type="png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/estilosIndex.css">
+    <style>
+        .page-header{ background:#fff; box-shadow:0 4px 18px rgba(15,23,32,0.06); position:sticky; top:0; z-index:60 }
+        .filters{ display:flex; gap:12px; align-items:center; margin:18px 0; flex-wrap:wrap }
+        .filters select, .filters input{ padding:10px 12px; border-radius:10px; border:1px solid rgba(15,23,32,0.06) }
+        .vehicles-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px }
+        @media (max-width:1000px){ .vehicles-grid{ grid-template-columns:repeat(2,1fr) } }
+        @media (max-width:720px){ .vehicles-grid{ grid-template-columns:1fr } }
+        .vehicle-card .fav { cursor:pointer; transition: transform .15s ease }
+        .vehicle-card .fav.active { color:#e63946; transform:scale(1.06) }
+        .pagination{ margin-top:18px; display:flex; gap:8px; align-items:center }
+    </style>
+</head>
+<body>
 
-    <main class="container page-vehiculos">
-      <section class="intro">
-        <h1>Elige el vehículo que quieres conducir</h1>
-        <p class="muted">Filtra por tipo, combustible, cambio y plazas. Pulsa "Limpiar filtro" para volver a ver todos.</p>
-      </section>
+<script src="../JS/commonHeader.js"></script>
 
-      <section class="content-grid">
-        <aside class="filters">
-          <form id="filters-form">
-            <div class="filter-group">
-              <label for="f-tipo">Tipo de vehículo</label>
-              <select id="f-tipo" name="tipo">
-                <option value="">— Todos —</option>
-                <option value="turismo">Turismo</option>
-                <option value="suv">SUV</option>
-                <option value="furgoneta">Furgoneta</option>
-                <option value="deportivo">Deportivo</option>
-                <option value=" electrico">Eléctrico</option>
-              </select>
-            </div>
 
-            <div class="filter-group">
-              <label for="f-cambio">Cambio</label>
-              <select id="f-cambio" name="cambio">
-                <option value="">— Todos —</option>
-                <option value="manual">Manual</option>
-                <option value="automatico">Automático</option>
-              </select>
-            </div>
+<main class="container" style="padding:24px 20px">
+    <h1>Vehículos</h1>
 
-            <div class="filter-group">
-              <label for="f-motor">Motor</label>
-              <select id="f-motor" name="motor">
-                <option value="">— Todos —</option>
-                <option value="gasolina">Gasolina</option>
-                <option value="diesel">Diésel</option>
-                <option value="hibrido">Híbrido</option>
-                <option value="electrico">Eléctrico</option>
-              </select>
-            </div>
+    <div class="filters">
+        <input id="q" placeholder="Buscar marca, modelo o matrícula" style="flex:1">
+        <select id="f_categoria"><option value="">Todas las categorías</option></select>
+        <select id="f_cambio"><option value="">Cambio</option><option value="automático">Automático</option><option value="manual">Manual</option></select>
+        <select id="f_motor"><option value="">Motor</option><option value="eléctrico">Eléctrico</option><option value="híbrido">Híbrido</option><option value="gasolina">Gasolina</option><option value="diésel">Diésel</option></select>
+        <select id="f_plazas"><option value="">Plazas</option><option value="2">2</option><option value="4">4</option><option value="5">5</option><option value="7">7</option></select>
+    </div>
 
-            <div class="filter-group">
-              <label for="f-plazas">Plazas</label>
-              <select id="f-plazas" name="plazas">
-                <option value="">— Cualquiera —</option>
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="7">7</option>
-              </select>
-            </div>
+    <div id="vehiclesGrid" class="vehicles-grid"></div>
+    <div id="vehiclesPagination" class="pagination"></div>
 
-            <div class="filter-actions">
-              <button type="button" id="btn-clear" class="btn-ghost">Limpiar filtro</button>
-            </div>
-          </form>
-        </aside>
+</main>
 
-        <section class="vehicles-list" id="vehicles-list">
-          <!-- Lista de vehículos cargada dinámicamente -->
-          <div class="loading">Cargando vehículos...</div>
-        </section>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <strong>RodaVía España</strong>
-          <p class="muted">Lujo · Fiabilidad · Confort</p>
-        </div>
-        <div class="muted">&copy; 2025 RodaVía</div>
-      </div>
-    </footer>
-
-    <script src="../JS/vehiculos.js"></script>
-  </body>
+<script src="../JS/vehiculos.js"></script>
+</body>
 </html>
+

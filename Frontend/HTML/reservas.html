@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reservar Vehículo</title>
+<link rel="stylesheet" href="../CSS/estilosIndex.css">
+<style>
+    .card {background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);max-width:850px;margin:20px auto;}
+    .veh-img {width:100%;height:260px;object-fit:cover;border-radius:10px;}
+    .row {display:flex;gap:22px;margin-top:15px;}
+    .col {flex:1;}
+    label {font-weight:600;margin-top:10px;display:block;}
+    input, select {width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-top:4px;}
+    .btn-primary {margin-top:18px;background:#0b3d91;color:white;padding:12px;border:none;border-radius:10px;width:100%;cursor:pointer;font-size:16px;}
+    .success, .error {margin:10px 0;padding:10px;border-radius:8px;font-weight:600;}
+    .success {background:#d1ffd6;color:#086e0a;}
+    .error {background:#ffd6d6;color:#9d0000;}
+</style>
+</head>
+<body>
+
+<script src="../JS/commonHeader.js"></script>
+
+<div class="card">
+    <h2>Finalizar Reserva</h2>
+    <div id="infoVehiculo"></div>
+
+    <form id="formReserva">
+        <div class="row">
+            <div class="col">
+                <label>Fecha inicio</label>
+                <input type="date" name="fecha_inicio" id="fecha_inicio" required>
+            </div>
+            <div class="col">
+                <label>Fecha fin</label>
+                <input type="date" name="fecha_fin" required>
+            </div>
+        </div>
+
+        <label>Método de pago</label>
+        <select name="metodo_pago" required>
+            <option value="">Seleccione</option>
+            <option value="tarjeta">Tarjeta</option>
+            <option value="paypal">PayPal</option>
+            <option value="transferencia">Transferencia</option>
+        </select>
+
+        <input type="hidden" name="id_vehiculo" id="idVeh">
+
+        <button class="btn-primary">Reservar</button>
+    </form>
+
+    <div id="msg"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    // Obtener ID vehículo
+    const params = new URLSearchParams(location.search);
+    const idVeh = params.get("idVeh");
+    document.getElementById("idVeh").value = idVeh;
+
+    if (!idVeh) {
+        document.getElementById("infoVehiculo").innerHTML =
+            `<p class="error">Vehículo no especificado.</p>`;
+        return;
+    }
+
+    // Cargar datos vehículo
+    const r = await fetch("../../Backend/PHP/getVehiculo.php?id=" + idVeh);
+    const data = await r.json();
+
+    if (!data.success) {
+        document.getElementById("infoVehiculo").innerHTML =
+            `<p class="error">${data.message}</p>`;
+        return;
+    }
+
+    const v = data.vehiculo;
+
+    const img = v.imagen ? "../../SRC/IMG/vehiculos/" + v.imagen : "../../SRC/IMG/noimage.png";
+
+    document.getElementById("infoVehiculo").innerHTML = `
+    <img src="${img}" class="veh-img">
+
+    <h3>${v.marca} ${v.modelo} (${v.anio || "N/D"})</h3>
+
+    <div class="row">
+        <div class="col">
+            <p><strong>Matrícula:</strong> ${v.matricula}</p>
+            <p><strong>Precio por día:</strong> ${v.precio_dia} €</p>
+            <p><strong>Estado:</strong> ${v.estado}</p>
+        </div>
+        <div class="col">
+            <p><strong>Cambio de marchas:</strong> ${v.cambio_marchas || "N/D"}</p>
+            <p><strong>Plazas:</strong> ${v.numero_plazas || "N/D"}</p>
+            <p><strong>Motor:</strong> ${v.tipo_motor || "N/D"}</p>
+            <p><strong>Caballos:</strong> ${v.caballos || "N/D"} CV</p>
+        </div>
+    </div>
+
+    <p style="margin-top:12px;"><strong>Descripción:</strong><br>${v.descripcion || "Sin descripción"}</p>
+
+`;
+});
+
+// VALIDACIÓN → No permitir reservar una fecha de inicio anterior a HOY
+document.getElementById("formReserva").addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const fd = new FormData(e.target);
+
+    const fecha_inicio = fd.get("fecha_inicio");
+    const hoy = new Date().toISOString().split("T")[0];
+
+    if (fecha_inicio < hoy) {
+        document.getElementById("msg").innerHTML =
+            `<div class="error">La fecha de inicio no puede ser anterior al día actual.</div>`;
+        return;
+    }
+
+    // Enviar reserva al backend
+    const r = await fetch("../../Backend/PHP/reservar.php", {
+        method: "POST",
+        body: fd
+    });
+
+    const data = await r.json();
+    const msg = document.getElementById("msg");
+
+    if (!data.success) {
+        msg.innerHTML = `<div class="error">${data.message}</div>`;
+        return;
+    }
+
+    msg.innerHTML = `<div class="success">${data.message}</div>`;
+
+    setTimeout(() => {
+        location.href = "misReservas.html";
+    }, 1500);
+});
+</script>
+
+</body>
+</html>

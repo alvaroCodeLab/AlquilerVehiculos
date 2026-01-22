@@ -1,0 +1,153 @@
+/* General body styles */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f8f9fb;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+.container {
+  padding: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.back-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+}
+
+/* Title styling */
+h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Vehicle details card */
+.vehicle-details {
+  display: flex;
+  gap: 25px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.vehicle-details img {
+  max-width: 250px;
+  max-height: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.vehicle-details .vehicle-info {
+  flex: 1;
+}
+
+.vehicle-details .vehicle-info h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.vehicle-details .vehicle-info p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+/* Form for the reservation */
+.form-reserva {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.form-reserva h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-reserva label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.form-reserva input,
+.form-reserva select {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-reserva input:focus,
+.form-reserva select:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Reservation button */
+.form-reserva button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-reserva button:hover {
+  background-color: #45a049;
+}
+
+/* Message styles */
+.message {
+  padding: 15px;
+  background-color: #f1f1f1;
+  color: #333;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 25px;
+  display: none;
+}
+
+.message.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.message.error {
+  background-color: #f2dede;
+  color: #a94442;
+}

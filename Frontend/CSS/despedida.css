@@ -1,0 +1,85 @@
+/* ===========================
+   Estilos para la página de despedida
+   =========================== */
+
+/* Estilo global para toda la página */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  height: 100%;
+  background-color: #f4f4f4; /* Gris claro */
+  color: #111; /* Color de texto más oscuro para contraste */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor principal */
+.logout-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Contenedor de la despedida */
+.logout-container {
+  background-color: #1a1a1a;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Estilo del título principal */
+.logout-message {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Subtítulo */
+.logout-subtext {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+/* Botón de login */
+.login-btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #007bff; /* Azul */
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efecto de hover en el botón */
+.login-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+  transform: translateY(-2px);
+}
+
+/* Animación de carga de la página */
+.logout-page {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

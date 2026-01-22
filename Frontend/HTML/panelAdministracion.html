@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | RodaVía</title>
+
+    <link rel="stylesheet" href="../CSS/estilosPanelAdministracion.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="tema-toggle">
+        <span>🌙</span>
+        <label class="switch">
+            <input type="checkbox" id="temaSwitch">
+            <span class="slider round"></span>
+        </label>
+        <span>☀️</span>
+    </div>
+
+    <div class="admin-wrapper">
+
+        <!-- ========== SIDEBAR ========== -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../../SRC/IMG/logoRodaVía-removebg-preview.png" alt="RodaVía">
+            </div>
+
+            <nav class="menu">
+                <a class="active" data-section="dashboard">📊 Panel General</a>
+                <a data-section="vehiculos">🚗 Gestión de Vehículos</a>
+                <a data-section="usuarios">👥 Gestión de Usuarios</a>
+                <a data-section="reservas">📅 Gestión de Reservas</a>
+            </nav>
+
+            <button class="logout" id="logoutBtn">Cerrar sesión</button>
+        </aside>
+
+
+        <!-- ========== CONTENIDO PRINCIPAL ========== -->
+        <main class="content">
+
+            <!-- ===== DASHBOARD ===== -->
+            <section id="dashboard" class="panel-section active">
+                <h2>📊 Panel general</h2>
+
+                <div class="cards">
+                    <div class="card">
+                        <h3>Vehículos</h3>
+                        <p id="countVehiculos">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Clientes</h3>
+                        <p id="countClientes">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Reservas</h3>
+                        <p id="countReservas">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Ingresos Totales</h3>
+                        <p id="ingresosTotales">0 €</p>
+                    </div>
+                </div>
+
+                <!-- Widgets modernos: distribución de estados, reservas semanales, top vehículos -->
+                <div class="stat-widgets">
+                    <div class="widget-card donut-card">
+                        <h4>Estado de la flota</h4>
+                        <canvas id="chartEstado" width="220" height="160"></canvas>
+                    </div>
+
+                    <div class="widget-card spark-card">
+                        <h4>Reservas (últimos 7 días)</h4>
+                        <canvas id="chartReservasSemana" width="400" height="160"></canvas>
+                    </div>
+
+                    <div class="widget-card top-card">
+                        <h4>Vehículos más alquilados</h4>
+                        <div id="topVehiculos" class="top-vehiculos">
+                            <!-- JS insertará una lista moderna -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts">
+                    <canvas id="chartIngresos"></canvas>
+                    <canvas id="chartVehiculos"></canvas>
+                </div>
+            </section>
+
+
+            <!-- ===== VEHÍCULOS ===== -->
+            <section id="vehiculos" class="panel-section">
+                <h2>🚗 Gestión de Vehículos</h2>
+            
+                    <div class="vehiculos-toolbar">
+                        <div class="filtros-visuales">
+                            <input type="text" id="buscadorVehiculos" placeholder="🔍 Buscar por marca, modelo o matrícula..." class="filtro-grande">
+
+                            <div class="filtros-chips">
+                                <select id="filtroEstado" class="filtro-grande">
+                                    <option value="">Todos los estados</option>
+                                    <option value="disponible">Disponible</option>
+                                    <option value="alquilado">Alquilado</option>
+                                    <option value="mantenimiento">Mantenimiento</option>
+                                </select>
+
+                                <select id="filtroMarca" class="filtro-grande">
+                                    <option value="">Todas las marcas</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="acciones-vehiculos">
+                            <button id="btnAgregarVehiculo" class="btn-add-modern">➕ Nuevo Vehículo</button>
+                        </div>
+                    </div>
+            
+                <!-- GRID MODERNO -->
+                <div id="gridVehiculos" class="vehiculos-grid">
+                    <!-- JS inserta tarjetas aquí -->
+                </div>
+            </section>
+
+            <!-- ===== USUARIOS ===== -->
+            <section id="usuarios" class="panel-section">
+                <h2>👥 Gestión de Usuarios</h2>
+
+                <div style="margin-bottom:12px; display:flex; gap:12px; align-items:center;">
+                    <input id="buscadorUsuarios" placeholder="🔍 Buscar por nombre o email" class="filtro-grande" style="flex:1">
+                    <button id="btnNuevoUsuario" class="btn-add" style="margin-left:12px">➕ Nuevo usuario</button>
+                </div>
+
+                <div style="overflow:auto;">
+                    <table id="tablaUsuarios" class="tabla" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Fecha registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ===== RESERVAS ===== -->
+            <section id="reservas" class="panel-section">
+                <h2>📅 Gestión de Reservas</h2>
+
+                <div class="reservas-toolbar" style="display:flex;gap:12px;margin-bottom:12px;align-items:center">
+                    <input id="buscadorReservas" placeholder="🔍 Buscar por usuario, vehículo o estado" class="filtro-grande" style="flex:1">
+                    <button id="btnNuevaReserva" class="btn-add" style="margin-left:12px">➕ Nueva reserva</button>
+                </div>
+
+                <div style="overflow:auto;">
+                    <div id="gridReservas" class="reservas-grid">
+                        <!-- JS insertará tarjetas de reserva aquí -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modales eliminados: usar página separada para crear/editar vehículos -->
+
+    <!-- Contenedor para toasts -->
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="../JS/panelAdministracion.js"></script>
+    <script src="../JS/panelUsuarios.js"></script>
+    <script src="../JS/panelReservas.js"></script>
+
+</body>
+</html>

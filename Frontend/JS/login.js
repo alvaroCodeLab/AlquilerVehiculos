@@ -8,6 +8,23 @@ document.addEventListener('DOMContentLoaded', function () {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
+// GSAP: animación de entrada para la pantalla de login
+document.addEventListener('DOMContentLoaded', function () {
+    if (window.gsap) {
+        try { gsap.registerPlugin(window.ScrollTrigger); } catch (e) { }
+
+        const container = document.querySelector('.login-container');
+        const logo = document.querySelector('.login-logo');
+
+        if (container) {
+            gsap.from(container, { y: 40, opacity: 0, duration: 0.7, ease: 'power2.out' });
+        }
+        if (logo) {
+            gsap.from(logo, { y: -20, opacity: 0, duration: 0.9, delay: 0.15, ease: 'power2.out' });
+        }
+    }
+});
+
             var datosUsuario = {
                 email: email,
                 password: password

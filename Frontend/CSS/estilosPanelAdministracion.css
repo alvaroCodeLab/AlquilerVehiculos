@@ -1,0 +1,821 @@
+/* ========== GENERALES ========== */
+body {
+  margin: 0;
+  background: #1e1f22;
+  color: #f4f4f4;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.admin-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: 260px;
+  background: #141517;
+  border-right: 1px solid #2b2d31;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.logo img {
+  width: 100%;
+  filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.4));
+  margin-bottom: 30px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: #00b4d8;
+  color: #fff;
+}
+
+.logout {
+  margin-top: auto;
+  padding: 12px;
+  background: #ef233c;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.logout:hover {
+  background: #d90429;
+}
+
+/* ========== CONTENIDO ========== */
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.panel-section {
+  display: none;
+}
+.panel-section.active {
+  display: block;
+}
+
+/* ===== CARDS ===== */
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+/* ===== WIDGETS MODERNOS (PANEL GENERAL) ===== */
+.stat-widgets {
+  display: grid;
+  grid-template-columns: 260px 1fr 320px;
+  gap: 18px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+.widget-card {
+  background: linear-gradient(
+    180deg,
+    rgba(44, 47, 51, 0.95),
+    rgba(38, 40, 43, 0.9)
+  );
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+.widget-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  color: #e6eef6;
+}
+
+.top-vehiculos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.top-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.top-item .rank {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00b4d8, #0077a1);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.top-item .meta {
+  flex: 1;
+}
+.top-item .meta .model {
+  font-weight: 700;
+}
+.top-item .meta .count {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 980px) {
+  .stat-widgets {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #2c2f33;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  text-align: center;
+  animation: fadeUp 0.5s ease;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ===== TABLAS ===== */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 12px;
+  background: #2c2f33;
+  border-bottom: 1px solid #444;
+}
+
+.btn-add {
+  background: #00b4d8;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-edit {
+  background: #4caf50;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-delete {
+  background: #ef233c;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+/* ===== CHARTS ===== */
+.charts {
+  margin-top: 40px;
+  display: flex;
+  gap: 40px;
+}
+
+canvas {
+  background: #2c2f33;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Animación */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========= THEME ========= */
+body.claro {
+  background: #f4f4f4;
+  color: #222;
+}
+body.claro .sidebar {
+  background: #fff;
+}
+body.claro .card,
+body.claro canvas,
+body.claro .tabla th,
+body.claro .tabla td {
+  background: #fff;
+  color: #000;
+}
+
+/* ========= TOGGLE SWITCH ========= */
+.tema-toggle {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  inset: 0;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #00b4d8;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* ========= MODAL GLOBAL ========= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999;
+  overflow-y: auto; /* permite que la pantalla haga scroll si el modal es muy alto */
+}
+
+/* ========= MODAL CONTENIDO ADAPTABLE ========= */
+.modal-content {
+  background: #2f3136;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 18px;
+  padding: 26px;
+  animation: fadeUp 0.25s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* GRID del formulario */
+#formVehiculo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px 20px;
+}
+
+/* Campos */
+#formVehiculo input,
+#formVehiculo select,
+#formVehiculo textarea {
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #3c3d40;
+  background: #1c1d20;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Textarea ocupa dos columnas */
+#descripcion {
+  grid-column: span 2;
+}
+
+/* Botonera */
+.form-buttons {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Botones */
+.modal button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ========= VERSIÓN FULLSCREEN PARA MÓVILES ========= */
+@media (max-width: 620px) {
+  .modal {
+    align-items: flex-end; /* sheet modal inferior */
+    padding: 0;
+  }
+
+  .modal-content {
+    width: 100%;
+    height: 100vh; /* ocupa toda la pantalla */
+    max-width: none;
+    border-radius: 0; /* aspecto de app móvil */
+    padding: 22px;
+    overflow-y: auto; /* scroll SOLO cuando haga falta */
+    display: flex;
+    flex-direction: column;
+  }
+
+  #formVehiculo {
+    grid-template-columns: 1fr; /* una sola columna */
+  }
+
+  #descripcion {
+    grid-column: span 1;
+  }
+
+  .form-buttons {
+    grid-column: span 1;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .form-buttons button {
+    width: 100%; /* botones full-width */
+  }
+}
+
+/* GRID MODERNO PARA FORMULARIO */
+#formVehiculo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px 20px;
+}
+
+/* Cada label ocupa 100% de su celda */
+#formVehiculo label {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: -5px;
+}
+
+#formVehiculo input,
+#formVehiculo select,
+#formVehiculo textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #3d3f43;
+  background: #1f1f22;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+#formVehiculo input:focus,
+#formVehiculo select:focus,
+#formVehiculo textarea:focus {
+  border-color: #00b4d8;
+  outline: none;
+}
+
+/* TEXTAREA ocupa 2 columnas en pantallas grandes */
+#descripcion {
+  grid-column: span 2;
+}
+
+/* Botonera siempre al final */
+#formVehiculo .form-buttons {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Botones modernizados */
+.modal button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button.btn-add {
+  background: linear-gradient(135deg, #00b4d8, #0092b1);
+  color: white;
+}
+button.btn-add:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #009cc2, #0077a1);
+}
+
+button.btn-delete {
+  background: #ef233c;
+  color: white;
+}
+button.btn-delete:hover {
+  background: #d90429;
+  transform: scale(1.05);
+}
+
+/* Optimizado para móviles */
+@media (max-width: 520px) {
+  .modal-content {
+    padding: 20px;
+  }
+  #descripcion {
+    grid-column: span 1;
+  }
+  #formVehiculo .form-buttons {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ======== VEHÍCULOS GRID MODERNO ======== */
+.vehiculos-toolbar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filtro-grande {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #232426;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.filtros-visuales {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+}
+.filtros-chips {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.acciones-vehiculos {
+  display: flex;
+  align-items: center;
+}
+
+/* Especificaciones pequeñas en la tarjeta */
+.vehicle-specs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.spec {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0.95;
+}
+
+/* Modal de confirmación más destacado */
+#modalConfirm .modal-content {
+  width: 420px;
+  text-align: left;
+}
+
+/* Toasts */
+#toastContainer {
+  position: fixed;
+  right: 20px;
+  top: 80px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #222;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast.success {
+  background: linear-gradient(90deg, #4caf50, #2e7d32);
+}
+.toast.error {
+  background: linear-gradient(90deg, #ef233c, #b00020);
+}
+
+.vehiculos-toolbar input,
+.vehiculos-toolbar select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #2c2f33;
+  color: #fff;
+}
+
+.btn-add-modern {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn-add-modern:hover {
+  transform: scale(1.05);
+}
+
+.vehiculos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 15px;
+}
+
+/* Reservas: grid de tarjetas */
+.reservas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+.reserva-card {
+  background: linear-gradient(180deg, #141516 0%, #1f2124 100%);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.reserva-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reserva-id {
+  color: #cbd5e1;
+  font-weight: 700;
+}
+.reserva-estado {
+  text-transform: capitalize;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.estado-pendiente {
+  background: rgba(255, 193, 7, 0.12);
+  color: #f6c84c;
+}
+.estado-confirmada {
+  background: rgba(76, 175, 80, 0.12);
+  color: #7fe08a;
+}
+.estado-cancelada {
+  background: rgba(239, 35, 60, 0.08);
+  color: #ff9090;
+}
+.estado-finalizada {
+  background: rgba(33, 150, 243, 0.08);
+  color: #8fcfff;
+}
+
+.reserva-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.reserva-user,
+.reserva-veh,
+.reserva-dates,
+.reserva-total {
+  color: #d6e3f0;
+  opacity: 0.95;
+}
+.reserva-thumb img {
+  display: block;
+}
+.reserva-total {
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.reserva-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.reserva-actions .btn {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.reserva-actions .btn-edit {
+  background: linear-gradient(90deg, #00b4d8, #0077a1);
+  color: #fff;
+}
+.reserva-actions .btn-delete {
+  background: linear-gradient(90deg, #ef233c, #d90429);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .reservas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form grid para páginas de vehículo */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-grid .field {
+  display: flex;
+  flex-direction: column;
+}
+.form-grid .field.full {
+  grid-column: 1 / -1;
+}
+.page-container {
+  padding: 28px;
+}
+.page-container .card {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vehicle-card {
+  background: #2c2f33;
+  padding: 15px;
+  border-radius: 12px;
+  animation: fadeUp 0.4s ease;
+  transition: 0.3s;
+  position: relative;
+}
+.vehicle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.vehicle-img {
+  width: 100%;
+  height: 140px;
+  background: #1a1b1e;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 10px;
+}
+
+.vehicle-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.vehicle-info {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.vehicle-badge {
+  padding: 6px 10px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.badge-disponible {
+  background: #4caf50;
+  color: #fff;
+}
+.badge-alquilado {
+  background: #ef233c;
+  color: #fff;
+}
+.badge-mantenimiento {
+  background: #f4a261;
+  color: #fff;
+}
+
+.vehicle-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.icon-btn {
+  background: #1f1f1f;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.icon-btn:hover {
+  background: #333;
+}
+
+.icon-btn.edit {
+  color: #4caf50;
+}
+.icon-btn.delete {
+  color: #ef233c;
+}
+
+/* Reducir tamaño de las gráficas para que quepan sin scroll */
+.charts {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px; /* 🔥 MUCHÍSIMO MENOS ESPACIO ENTRE GRÁFICAS */
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.charts canvas {
+  width: 48% !important; /* Más juntas pero manteniendo proporción */
+  height: 260px !important; /* Más compactas */
+  background: #2c2f33;
+  padding: 10px; /* Menos padding = menos espacio visual */
+  border-radius: 8px;
+}

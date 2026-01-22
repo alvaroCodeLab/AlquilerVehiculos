@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RodaVía — Alquiler de Vehículos</title>
 
+    <link href="../../SRC/IMG/favicom/website_icon_white.png" rel="website icon" type="png">
+
     <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- CSS -->
@@ -14,39 +18,26 @@
 
 <body>
 
-<header class="nav">
-    <div class="container nav-inner">
-        <div class="brand">
-            <img src="../../SRC/IMG/logoRodaVía-removebg-preview.png" width="100">
-            <span class="brand-name">Roda<span class="accent">Vía</span></span>
-        </div>
-
-        <nav class="nav-links">
-            <a href="../HTML/vehiculos.html">Vehículos</a>
-            <a href="#features">Características</a>
-            <a href="#cta">Reserva</a>
-            <a class="btn-ghost" href="../HTML/registro.html">Registrarse</a>
-        </nav>
-    </div>
-</header>
+<script src="../JS/commonHeader.js" defer></script>
 
 <main>
 
     <!-- HERO -->
-    <section class="hero">
-        <div class="container hero-grid">
+    <section class="hero full-hero">
+        <div class="hero-grid">
             <div class="hero-text animate" data-anim="fade-up">
                 <h1 class="hero-title">Alquila el coche perfecto para tu viaje</h1>
                 <p class="hero-sub">La forma más fácil y segura de conducir tu próxima aventura.</p>
 
                 <div class="hero-cta">
                     <a class="btn-primary" href="../HTML/registro.html">Regístrate</a>
-                    <a class="btn-outline" href="#fleet">Ver Flota</a>
+                    <a class="btn-outline" href="../HTML/login.html">Iniciar Sesión</a>
                 </div>
             </div>
 
             <div class="hero-visual animate" data-anim="slide-in-right">
-                <img class="hero-photo" src="../../SRC/IMG/indexPhoto.png" alt="">
+                <!-- La imagen se coloca pegada al borde derecho y se adapta; reemplaza el src si necesitas otra imagen -->
+                <img class="hero-photo" src="../../SRC/IMG/indexPhoto.png" alt="Vehículo" />
             </div>
         </div>
     </section>
@@ -57,34 +48,20 @@
             <div class="slider-track" id="logoTrack">
 
                 <!-- Logos reales -->
-                <img class="logo-img" src="../../SRC/IMG/logoBMW.webp" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoMercedes.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoPeugeot.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoCitroen.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoReanult.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoSkoda.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoSeat.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoVolkswagen.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoAudi.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoFord.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoHyundai.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoKia.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoFiat.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel2.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel2.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel2.png" alt="">
 
                 <!-- Duplicados para bucle infinito -->
-                <img class="logo-img" src="../../SRC/IMG/logoBMW.webp" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoMercedes.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoPeugeot.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoCitroen.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoReanult.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoSkoda.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoSeat.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoVolkswagen.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoAudi.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoFord.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoHyundai.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoKia.png" alt="">
-                <img class="logo-img" src="../../SRC/IMG/logoFiat.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel2.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel2.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel.png" alt="">
+                <img class="logo-img" src="../../SRC/IMG/vehiculos/carrusel2.png" alt="">
 
             </div>
         </div>
@@ -96,12 +73,49 @@
         <p class="section-sub">Todo diseñado para brindar comodidad, seguridad y estilo.</p>
 
         <div class="features-grid">
-            <article class="feature-card"><div class="icon">✓</div><h3>Reserva rápida</h3><p>Fácil y segura.</p></article>
-            <article class="feature-card"><div class="icon">€</div><h3>Precios competitivos</h3><p>Sin sorpresas.</p></article>
-            <article class="feature-card"><div class="icon">★</div><h3>Vehículos premium</h3><p>Siempre perfectos.</p></article>
-            <article class="feature-card"><div class="icon">⏱</div><h3>Atención 24/7</h3><p>Siempre contigo.</p></article>
-            <article class="feature-card"><div class="icon">↩</div><h3>Cancelación flexible</h3><p>Tu tranquilidad.</p></article>
-            <article class="feature-card"><div class="icon">✈</div><h3>Entrega en aeropuertos</h3><p>Cómodo y rápido.</p></article>
+            <!-- Añadimos atributo data-img opcional para que al hacer hover se muestre la imagen correspondiente dentro de la tarjeta.
+                 El usuario puede completar el path en el atributo data-img="../../SRC/IMG/tuimagen.jpg" -->
+            <article class="feature-card" data-img="../../SRC/IMG/ReservaRapida.jpg">
+                <div class="feature-media" aria-hidden="true"></div>
+                <div class="icon">✓</div>
+                <h3>Reserva rápida</h3>
+                <p>Fácil y segura.</p>
+            </article>
+
+            <article class="feature-card" data-img="../../SRC/IMG/PreciosCompetitivos.jpg">
+                <div class="feature-media" aria-hidden="true"></div>
+                <div class="icon">€</div>
+                <h3>Precios competitivos</h3>
+                <p>Sin sorpresas.</p>
+            </article>
+
+            <article class="feature-card" data-img="../../SRC/IMG/VehiculosPremium.jpg">
+                <div class="feature-media" aria-hidden="true"></div>
+                <div class="icon">★</div>
+                <h3>Vehículos premium</h3>
+                <p>Siempre perfectos.</p>
+            </article>
+
+            <article class="feature-card" data-img="../../SRC/IMG/Atencion24_7.jpg">
+                <div class="feature-media" aria-hidden="true"></div>
+                <div class="icon">⏱</div>
+                <h3>Atención 24/7</h3>
+                <p>Siempre contigo.</p>
+            </article>
+
+            <article class="feature-card" data-img="../../SRC/IMG/CancelacionFlexible.jpg">
+                <div class="feature-media" aria-hidden="true"></div>
+                <div class="icon">↩</div>
+                <h3>Cancelación flexible</h3>
+                <p>Tu tranquilidad.</p>
+            </article>
+
+            <article class="feature-card" data-img="../../SRC/IMG/EntregaAeropuertos.jpg">
+                <div class="feature-media" aria-hidden="true"></div>
+                <div class="icon">✈</div>
+                <h3>Entrega en aeropuertos</h3>
+                <p>Cómodo y rápido.</p>
+            </article>
         </div>
     </section>
 
@@ -109,45 +123,58 @@
     <section id="fleet" class="fleet container">
         <h2 class="section-title">Nuestra flota</h2>
         <p class="section-sub">Desde compactos hasta lujo premium.</p>
-
-        <div class="fleet-grid">
-            <div class="fleet-card"><div class="fleet-icon">🚘</div><h4>Premium</h4><p>Alta gama.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">🏎</div><h4>Deportivo</h4><p>Velocidad.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">🎩</div><h4>Clásicos</h4><p>Elegancia.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">🚙</div><h4>SUV</h4><p>Espacio.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">📦</div><h4>Furgonetas</h4><p>Capacidad.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">🚗</div><h4>Urbanos</h4><p>Compactos.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">🔌</div><h4>Eléctricos</h4><p>Eficiencia.</p></div>
-            <div class="fleet-card"><div class="fleet-icon">💎</div><h4>Lujo</h4><p>Exclusivos.</p></div>
+    
+        <!-- Menu de categorías (botones minimalistas) -->
+        <div class="fleet-controls" role="tablist" aria-label="Categorías de flota">
+            <button class="fleet-btn active" data-cat="1">Económico</button>
+            <button class="fleet-btn" data-cat="2">Compacto</button>
+            <button class="fleet-btn" data-cat="3">Mediano</button>
+            <button class="fleet-btn" data-cat="4">SUV</button>
+            <button class="fleet-btn" data-cat="5">De lujo</button>
+            <button class="fleet-btn" data-cat="6">Deportivo</button>
+            <button class="fleet-btn" data-cat="7">Familiar</button>
+            <button class="fleet-btn" data-cat="8">Furgoneta</button>
+            <button class="fleet-btn" data-cat="9">Camioneta</button>
+            <button class="fleet-btn" data-cat="10">Eléctrico</button>
+            <button class="fleet-btn" data-cat="11">Híbrido</button>
+            <button class="fleet-btn" data-cat="12">Cabriolet</button>
         </div>
+    
+        <!-- Contenedor para mostrar la descripción dinámica -->
+        <div id="fleetDescription" class="fleet-description">
+            <!-- La descripción cambiará dependiendo de la categoría seleccionada -->
+        </div>
+    
     </section>
+
 
     <!-- CTA -->
     <section id="cta" class="cta container">
         <div class="cta-inner">
-            <h2>Alquila tu coche ideal</h2>
-            <p>Regístrate y empieza tu viaje hoy mismo.</p>
-            <a class="btn-primary large" href="../HTML/registro.html">Regístrate</a>
+            <div class="cta-copy">
+                <h2>Alquila tu coche ideal</h2>
+                <p>Regístrate y empieza tu viaje hoy mismo.</p><br>
+                <a class="btn-primary large" href="../HTML/registro.html">Regístrate</a>
+            </div>
+
+            <!-- Visual animado: la imagen del coche sin fondo será animada desde la derecha hacia dentro y quedará mitad dentro del contenedor -->
+            <div class="cta-visual" aria-hidden="true">
+                <img class="cta-car" src="../../SRC/IMG/vehiculos/CTA_Coche.png" alt="Vehículo CTA">
+            </div>
         </div>
     </section>
 
 </main>
 
-<footer class="footer">
-    <div class="container footer-grid">
-        <div>
-            <strong>RodaVía España</strong>
-            <p class="muted">Lujo · Fiabilidad · Confort</p>
-        </div>
-
-        <div><a class="btn-ghost" href="../HTML/registro.html">Crear cuenta</a></div>
-
-        <div class="muted">&copy; 2025 RodaVía</div>
-    </div>
-</footer>
+<!-- Footer eliminado (aplicación web) -->
 
 <!-- JS -->
-<script src="../JS/index.js"></script>
+
+<!-- GSAP (animaciones) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+<script src="../JS/index.js" defer></script>
 
 </body>
 </html>

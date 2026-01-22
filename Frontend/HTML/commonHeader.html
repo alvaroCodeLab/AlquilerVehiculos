@@ -1,0 +1,61 @@
+<header class="nav opaque-header">
+    <div class="container nav-inner">
+
+        <!-- BRAND SIN IMAGEN -->
+        <div class="brand">
+            <img src="../../SRC/IMG/logoRodaViaSinFondo.png" class="brand-logo" alt="RodaVía">
+        </div>
+
+        <!-- HAMBURGUESA -->
+        <button id="menuToggle" class="menu-toggle" aria-label="Abrir menú">
+            ☰
+        </button>
+
+        <!-- NAV -->
+        <nav class="nav-links" id="navMenu">
+
+            <a href="../HTML/index.html" data-page="index">Principal</a>
+            <a href="../HTML/vehiculos.html" data-page="vehiculos">Vehículos</a>
+            <a href="../HTML/misReservas.html" id="linkReservas" data-page="reservas">Vehículos Reservados</a>
+
+            <a href="../HTML/favoritos.html" id="linkFavoritos" data-page="favoritos">
+                <!-- Corazón -->
+                <svg width="26" height="26" viewBox="0 0 24 24" class="heart">
+                    <path d="M12 21s-6.7-4.35-10-9.75C-1.72 6.11 
+                    1.39 1 6.08 1A6.4 6.4 0 0 1 12 4.09 
+                    6.4 6.4 0 0 1 17.92 1c4.69 0 7.8 5.11 
+                    4.08 10.25C18.7 16.65 12 21 12 21z"/>
+                </svg>
+            </a>
+
+            <!-- USUARIO -->
+            <div class="user-menu-container">
+                <a class="nav-user" id="linkCuenta" data-page="cuenta" href="../HTML/registro.html" title="Mi cuenta">
+                    <!-- Icono usuario -->
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 
+                        2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 
+                        1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"
+                        fill="#ffffff"/>
+                    </svg>
+                </a>
+
+                <!-- MENÚ USUARIO -->
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-email" id="userEmail">Usuario</div>
+                    <a href="../../Backend/PHP/logout.php" class="logout">Cerrar sesión</a>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<!-- GSAP (animaciones) - CDN: disponible en todas las páginas que incluyan este header -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+<script>
+    if (window.gsap && window.gsap.registerPlugin) {
+        try { gsap.registerPlugin(ScrollTrigger); } catch (e) { /* plugin ya registrado */ }
+    }
+</script>

@@ -56,9 +56,10 @@ if ($stmt->execute()) {
     try {
         // SERVIDOR SMTP
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; 'smtp.mail.yahoo.com';  // servidor SMTP
+        $mail->Host = 'smtp.gmail.com';
+        'smtp.mail.yahoo.com';  // servidor SMTP
         $mail->SMTPAuth = true;
-        $mail->Username = 'equiposoportegestionmulticines@gmail.com';     // <-- TU CORREO
+        $mail->Username = 'equiposoportegestionmulticines@gmail.com';     // <-- CORREO
         $mail->Password = 'crky edhq hhac gfbw';      // <-- CONTRASEÑA APP
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
@@ -69,7 +70,7 @@ if ($stmt->execute()) {
         // DESTINATARIO
         $mail->addAddress($email, $nombre);
 
-        // IMAGEN EN EL CORREO (OPCIONAL)
+        // IMAGEN EN EL CORREO 
         $mail->addEmbeddedImage('../../SRC/IMG/logoRodaVía-removebg-preview.png', 'logo');
 
         // CONTENIDO HTML DEL CORREO
@@ -96,7 +97,6 @@ if ($stmt->execute()) {
         $mail->send();
 
         echo json_encode(['success' => true]);
-
     } catch (Exception $e) {
 
         echo json_encode([
@@ -104,7 +104,6 @@ if ($stmt->execute()) {
             'message' => 'Usuario creado, pero hubo un problema enviando la confirmación: ' . $mail->ErrorInfo
         ]);
     }
-
 } else {
     echo json_encode([
         'success' => false,

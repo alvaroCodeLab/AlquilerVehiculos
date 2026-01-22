@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reserva — Crear / Editar | RodaVía</title>
+
+    <!-- Bootstrap 5 (solo para utilidades; el estilo principal es custom y coincide con vehiculo.html) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Copiado/adaptado del estilo que usamos en vehiculo.html para que sea idéntico */
+        :root{
+            --bg:#1a1a1a;
+            --card:#222;
+            --card-border:#333;
+            --input-bg:#2b2b2b;
+            --input-border:#444;
+            --text:#f0f0f0;
+            --btn-save-start:#00b4d8;
+            --btn-save-end:#0096c7;
+            --btn-back-start:#444;
+            --btn-back-end:#777;
+            --btn-delete:#b30000;
+            --focus-border:#666;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            padding: 28px 16px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        h2#pageTitle {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+            padding: 24px;
+        }
+
+        label { 
+            font-weight: 600;
+            color: #f5f5f5;
+            display:block;
+            margin-bottom:6px;
+        }
+
+        .form-control,
+        .form-select {
+            background: var(--input-bg);
+            color: var(--text);
+            border: 1px solid var(--input-border);
+            padding: 10px 14px;
+            border-radius: 10px !important;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background: var(--input-bg);
+            color: #fff;
+            border-color: var(--focus-border);
+            box-shadow: 0 0 0 0.2rem rgba(120,120,120,0.25);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--btn-save-start), var(--btn-save-end));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+        .btn-add:hover { opacity: .92; }
+
+        .btn-delete {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background: var(--btn-delete);
+            color: white;
+            font-weight: 700;
+        }
+        .btn-delete:hover { background:#990000; }
+
+        .btn-back {
+            background: linear-gradient(135deg, var(--btn-back-start), var(--btn-back-end));
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .btn-back:hover { opacity:.95; }
+
+        /* GRID form */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .full {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .full { grid-column: span 1; }
+        }
+
+        /* Estilos para los toasts */
+        #toastContainer {
+            position: fixed;
+            right: 20px;
+            top: 80px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: #222;
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+        }
+
+        .toast.error {
+            background: linear-gradient(90deg, #ef233c, #b00020);
+        }
+
+        .toast i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Animación de entrada */
+        .toast.show {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+
+        /* Animación de salida */
+        .toast.fade-out {
+            animation: slideOut 0.5s ease-in forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 id="pageTitle" class="fw-bold">Nueva reserva</h2>
+            <button id="backBtn" class="btn-back">Volver</button>
+        </div>
+
+        <div class="card">
+            <form id="reservaForm">
+                <input type="hidden" id="reservaId" name="id">
+
+                <div class="form-grid">
+
+                    <div>
+                        <label for="id_usuario">Usuario</label>
+                        <select id="id_usuario" name="id_usuario" class="form-select" required>
+                            <!-- opciones añadidas por JS -->
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="id_vehiculo">Vehículo</label>
+                        <select id="id_vehiculo" name="id_vehiculo" class="form-select" required>
+                            <!-- opciones añadidas por JS -->
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="fecha_inicio">Fecha inicio</label>
+                        <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" required>
+                    </div>
+
+                    <div>
+                        <label for="fecha_fin">Fecha fin</label>
+                        <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" required>
+                    </div>
+
+                    <div>
+                        <label for="estado">Estado</label>
+                        <select id="estado" name="estado" class="form-select">
+                            <option value="pendiente">Pendiente</option>
+                            <option value="confirmada">Confirmada</option>
+                            <option value="cancelada">Cancelada</option>
+                            <option value="finalizada">Finalizada</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="total">Total (€)</label>
+                        <input type="number" step="0.01" id="total" name="total" class="form-control">
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" id="btnEliminarPage" class="btn-delete" style="display:none">🗑️ Eliminar</button>
+                    <button type="submit" class="btn-add">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="../JS/reservaForm.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestión de Usuarios | RodaVía</title>
+    <link rel="stylesheet" href="../CSS/estilosPanelAdministracion.css">
+</head>
+<body>
+
+    <div class="page-container">
+        <header style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <h2>Gestión de Usuarios</h2>
+            <div>
+                <button id="btnNuevo" class="btn-add">➕ Nuevo usuario</button>
+            </div>
+        </header>
+
+        <main class="card" style="padding:18px;">
+            <div style="margin-bottom:12px; display:flex; gap:12px; align-items:center;">
+                <input id="buscador" placeholder="🔍 Buscar por nombre o email" class="filtro-grande" style="flex:1">
+            </div>
+
+            <div style="overflow:auto;">
+                <table id="tablaUsuarios" class="tabla" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Rol</th>
+                            <th>Fecha registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="../JS/panelUsuarios.js"></script>
+</body>
+</html>
