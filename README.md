@@ -1,47 +1,51 @@
-# 🚗 Vehicle Rental Web Application
+<p align="center">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" width="80"/>
+</p>
+
+<h1 align="center">🚗 Vehicle Rental Web Application</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PHP-8.x-blue" />
-  <img src="https://img.shields.io/badge/MySQL-Database-orange" />
-  <img src="https://img.shields.io/badge/HTML5-Markup-red" />
-  <img src="https://img.shields.io/badge/CSS3-Styles-blue" />
-  <img src="https://img.shields.io/badge/JavaScript-Frontend-yellow" />
-  <img src="https://img.shields.io/badge/Status-In%20Development-yellow" />
-  <img src="https://img.shields.io/badge/License-Academic-lightgrey" />
+  <strong>Plataforma web profesional para la gestión del alquiler de vehículos</strong><br/>
+  Reservas online · Administración · Gestión eficiente
 </p>
 
 <p align="center">
-  <strong>Aplicación web profesional para la gestión del alquiler de vehículos</strong><br/>
-  Reservas online · Panel de administración · Gestión de usuarios
+  <img src="https://img.shields.io/badge/PHP-8.x-blue"/>
+  <img src="https://img.shields.io/badge/MySQL-Database-orange"/>
+  <img src="https://img.shields.io/badge/HTML5-Markup-red"/>
+  <img src="https://img.shields.io/badge/CSS3-Styles-blue"/>
+  <img src="https://img.shields.io/badge/JavaScript-Frontend-yellow"/>
+  <img src="https://img.shields.io/badge/Status-In%20Development-yellow"/>
+  <img src="https://img.shields.io/badge/License-Academic-lightgrey"/>
 </p>
 
 ---
 
-## 📌 Descripción
+## 📖 Descripción
 
-**Vehicle Rental Web Application** es una plataforma web diseñada para gestionar de forma eficiente el alquiler de vehículos como coches, furgonetas y otros tipos de transporte.
+**Vehicle Rental Web Application** es una aplicación web diseñada para gestionar de forma integral el alquiler de vehículos como coches, furgonetas y otros tipos de transporte.
 
-La aplicación permite a los **clientes** consultar la disponibilidad de vehículos, realizar reservas en línea y gestionar sus alquileres de manera sencilla.  
-Los **administradores** disponen de un panel de control desde el cual pueden gestionar vehículos, usuarios, reservas y consultar estadísticas del sistema.
+La plataforma permite a los **clientes** consultar la disponibilidad de vehículos, realizar reservas en línea y gestionar sus alquileres de forma intuitiva.  
+Los **administradores** cuentan con un panel de control desde el cual pueden gestionar vehículos, usuarios, reservas y consultar estadísticas de uso.
 
-El proyecto sigue una arquitectura **cliente-servidor**, utilizando tecnologías web estándar y una base de datos relacional para garantizar la integridad y seguridad de la información.
-
----
-
-## 🎯 Objetivos del Proyecto
-
-✅ Desarrollar una aplicación web funcional y escalable  
-✅ Facilitar la gestión administrativa de vehículos y reservas  
-✅ Optimizar la experiencia del usuario con una interfaz intuitiva  
-✅ Centralizar la información en una base de datos segura  
+El sistema sigue una arquitectura **cliente-servidor**, utilizando tecnologías web estándar y una base de datos relacional para garantizar seguridad, escalabilidad e integridad de los datos.
 
 ---
 
-## ✨ Funcionalidades Principales
+## 🎯 Objetivos
+
+✔️ Desarrollar una plataforma web funcional y escalable  
+✔️ Facilitar la gestión administrativa de vehículos y reservas  
+✔️ Optimizar la experiencia del usuario  
+✔️ Centralizar la información en una base de datos segura  
+
+---
+
+## ✨ Funcionalidades
 
 ### 👤 Usuarios
-- Registro y autenticación.
-- Inicio y cierre de sesión.
+- Registro de usuarios.
+- Autenticación (login / logout).
 - Gestión de información personal.
 
 ### 🚘 Vehículos
@@ -55,34 +59,34 @@ El proyecto sigue una arquitectura **cliente-servidor**, utilizando tecnologías
 
 ### 📅 Reservas
 - Selección de vehículo.
-- Elección de fechas de inicio y fin del alquiler.
+- Elección de fechas de inicio y fin.
 - Confirmación de la reserva.
 - Consulta y modificación de reservas.
 
 ### 🛠️ Administración
-- Gestión de vehículos (crear, editar y eliminar).
-- Gestión de usuarios registrados.
+- Gestión de vehículos (alta, edición y eliminación).
+- Gestión de usuarios.
 - Control de reservas.
-- Visualización de informes y estadísticas.
+- Visualización de estadísticas e informes.
 
 ### 🔔 Notificaciones
-- Confirmación de reservas.
-- Recordatorios de fechas de entrega y devolución.
+- Confirmaciones de reserva.
+- Recordatorios de entrega y devolución.
 
 ---
 
-## 🧰 Tecnologías Utilizadas
+## 🧰 Tecnologías
 
-🖥️ **Frontend**
-- HTML5
-- CSS3
-- JavaScript
+### 🖥️ Frontend
+- HTML5  
+- CSS3  
+- JavaScript  
 
-⚙️ **Backend**
-- PHP
+### ⚙️ Backend
+- PHP  
 
-🗄️ **Base de Datos**
-- MySQL
+### 🗄️ Base de Datos
+- MySQL  
 
 ---
 
@@ -95,17 +99,29 @@ El proyecto sigue una arquitectura **cliente-servidor**, utilizando tecnologías
 
 ---
 
+## 🛣️ Roadmap
+
+- [x] Diseño de la interfaz
+- [x] Sistema de autenticación
+- [x] Gestión de vehículos
+- [x] Sistema de reservas
+- [ ] Notificaciones automáticas
+- [ ] Optimización de seguridad
+- [ ] Despliegue en producción
+
+---
+
 ## 🚧 Estado del Proyecto
 
 🟡 **En desarrollo**  
-Versión inicial con las funcionalidades principales en implementación.
+Versión inicial con funcionalidades principales implementadas.
 
 ---
 
 ## 📄 Licencia
 
-📘 Proyecto distribuido bajo una licencia de **uso académico o personal**.  
-La licencia puede adaptarse según las necesidades del autor.
+📘 Proyecto bajo licencia de **uso académico o personal**.  
+Puede adaptarse según las necesidades del autor.
 
 ---
 
@@ -113,17 +129,19 @@ La licencia puede adaptarse según las necesidades del autor.
 
 💡 Las contribuciones son bienvenidas
 
-1. Haz un fork del repositorio  
-2. Crea una nueva rama  
-3. Realiza tus cambios  
-4. Envía un pull request  
+1. Fork del repositorio  
+2. Crear nueva rama  
+3. Realizar cambios  
+4. Enviar Pull Request  
 
 ---
 
 ## 📬 Contacto
 
-📧 Para dudas, sugerencias o mejoras relacionadas con el proyecto, puedes contactar con el autor.
+📧 Para dudas, sugerencias o mejoras, puedes contactar con el autor del proyecto.
 
 ---
 
-⭐ **Si este proyecto te resulta útil, no olvides darle una estrella al repositorio**
+<p align="center">
+  ⭐ <strong>Si este proyecto te resulta útil, dale una estrella al repositorio</strong> ⭐
+</p>
