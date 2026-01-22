@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vehículos — RodaVía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/vehiculos.css">
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav-inner">
+        <div class="brand">
+          <img src="../../SRC/IMG/logoRodaVía-removebg-preview.png" width="84" alt="RodaVía logo">
+          <span class="brand-name">Roda<span class="accent">Vía</span></span>
+        </div>
+        <nav class="nav-links">
+          <a href="../HTML/index.html">Inicio</a>
+          <a href="#">Vehículos</a>
+          <a href="../HTML/registro.html" class="btn-ghost">Registrarse</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-vehiculos">
+      <section class="intro">
+        <h1>Elige el vehículo que quieres conducir</h1>
+        <p class="muted">Filtra por tipo, combustible, cambio y plazas. Pulsa "Limpiar filtro" para volver a ver todos.</p>
+      </section>
+
+      <section class="content-grid">
+        <aside class="filters">
+          <form id="filters-form">
+            <div class="filter-group">
+              <label for="f-tipo">Tipo de vehículo</label>
+              <select id="f-tipo" name="tipo">
+                <option value="">— Todos —</option>
+                <option value="turismo">Turismo</option>
+                <option value="suv">SUV</option>
+                <option value="furgoneta">Furgoneta</option>
+                <option value="deportivo">Deportivo</option>
+                <option value=" electrico">Eléctrico</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="f-cambio">Cambio</label>
+              <select id="f-cambio" name="cambio">
+                <option value="">— Todos —</option>
+                <option value="manual">Manual</option>
+                <option value="automatico">Automático</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="f-motor">Motor</label>
+              <select id="f-motor" name="motor">
+                <option value="">— Todos —</option>
+                <option value="gasolina">Gasolina</option>
+                <option value="diesel">Diésel</option>
+                <option value="hibrido">Híbrido</option>
+                <option value="electrico">Eléctrico</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="f-plazas">Plazas</label>
+              <select id="f-plazas" name="plazas">
+                <option value="">— Cualquiera —</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+
+            <div class="filter-actions">
+              <button type="button" id="btn-clear" class="btn-ghost">Limpiar filtro</button>
+            </div>
+          </form>
+        </aside>
+
+        <section class="vehicles-list" id="vehicles-list">
+          <!-- Lista de vehículos cargada dinámicamente -->
+          <div class="loading">Cargando vehículos...</div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>RodaVía España</strong>
+          <p class="muted">Lujo · Fiabilidad · Confort</p>
+        </div>
+        <div class="muted">&copy; 2025 RodaVía</div>
+      </div>
+    </footer>
+
+    <script src="../JS/vehiculos.js"></script>
+  </body>
+</html>

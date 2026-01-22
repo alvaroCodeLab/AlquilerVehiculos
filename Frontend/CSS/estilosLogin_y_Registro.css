@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #41454826 0%, #e9f0f12a 100%);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  color: #f0f0f0;
+}
+
+/* Contenedor general (ocupa toda la pantalla) */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Imagen izquierda (70%) */
+.login-image {
+  flex: 7;
+  background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80')
+    center/cover no-repeat;
+  position: relative;
+}
+
+/* Panel derecho (formulario, 30%) */
+.login-container {
+  flex: 3;
+  background: linear-gradient(160deg, #1e1f22, #2c2f33);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+  color: #f5f5f5; /* texto claro sobre fondo oscuro */
+}
+
+/* Contenido del formulario */
+.login-content {
+  width: 85%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Logo */
+.login-logo {
+  display: block;
+  width: 90%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto 1.5rem auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.login-logo:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45));
+}
+
+/* Título y subtítulo */
+.login-content h1 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #00b4d8; /* azul brillante para resaltar sobre el fondo gris */
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  color: #cccccc;
+  margin-top: 0.5rem;
+  margin-bottom: 1.8rem;
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  padding: 0.9rem 1rem;
+  border: 1.5px solid #444;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #2c2f33;
+  color: #f5f5f5;
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+input:focus {
+  border-color: #00b4d8;
+  box-shadow: 0 0 6px rgba(0, 180, 216, 0.4);
+  outline: none;
+  background: #25272b;
+}
+
+/* Botón principal */
+button {
+  padding: 1rem;
+  border: none;
+  background: linear-gradient(135deg, #007bff, #00b4d8);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0056b3, #0096c7);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 123, 255, 0.25);
+}
+
+/* Enlaces inferiores */
+.links {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.links a {
+  color: #00b4d8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.links a:hover {
+  text-decoration: underline;
+  color: #4facfe;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login-image {
+    flex: none;
+    height: 40vh;
+  }
+
+  .login-container {
+    flex: none;
+    height: 60vh;
+    box-shadow: none;
+    background: #1e1f22;
+  }
+
+  .login-content {
+    width: 90%;
+    text-align: center;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .login-logo {
+    width: 75%;
+    max-width: 300px;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Contenedor del formulario para limitar la altura */
+.form-wrapper {
+  max-height: 55vh; /* controla la altura visible del formulario */
+  overflow-y: auto; /* si hay más campos, se hace scroll interno */
+  padding-right: 5px; /* espacio para que el scroll no tape el contenido */
+}
+
+/* Personalización del scroll (opcional, estético) */
+.form-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.form-wrapper::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 4px;
+}
+
+.form-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Ajuste para que el contenido total se centre igual que en login */
+.login-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80%;
+}
+
+/* Contenedor para mensajes de error */
+#errorMessage {
+  margin-top: 1rem;
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.1);
+  border: 1px solid #ff4d4d;
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  display: none; /* Oculto por defecto */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animación suave al aparecer */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

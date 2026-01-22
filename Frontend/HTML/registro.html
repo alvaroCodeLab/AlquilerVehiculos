@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RodaVía | Registro</title>
+  <link href="../CSS/estilosLogin_y_Registro.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="login-wrapper">
+    <!-- Imagen izquierda -->
+    <div class="login-image"></div>
+
+    <!-- Panel de formulario derecha -->
+    <div class="login-container">
+      <div class="login-content">
+        <img src="../../SRC/IMG/logoRodaVía-removebg-preview.png" alt="Logo RodaVía" class="login-logo">
+
+        <p class="subtitle">Regístrate y comienza tu viaje con RodaVía</p>
+
+        <div class="form-wrapper">
+          <form id="registerForm">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="primerApellido" placeholder="Primer Apellido" required>
+            <input type="text" id="segundoApellido" placeholder="Segundo Apellido" required>
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="tel" id="telefono" placeholder="Teléfono" required>
+            <input type="text" id="direccion" placeholder="Dirección" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" required>
+            <button type="submit">Registrarse</button>
+          </form>
+        </div>
+
+        <!-- Contenedor de mensajes de error -->
+        <div id="errorMessage"></div>
+
+        <div class="links">
+          <a href="../HTML/login.html">¿Ya tienes una cuenta? Inicia sesión</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../JS/registro.js"></script>
+</body>
+
+</html>
+
+
