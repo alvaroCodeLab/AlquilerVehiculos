@@ -1,16 +1,8 @@
 # ===============================
 # Configuración sensible
 # ===============================
-config.php
 .env
 .env.*
-
-# ===============================
-# Base de datos
-# ===============================
-*.sql
-!database/schema.sql
-!database/seed.sql
 
 # ===============================
 # Dependencias
