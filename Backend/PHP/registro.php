@@ -56,16 +56,15 @@ if ($stmt->execute()) {
     try {
         // SERVIDOR SMTP
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        'smtp.mail.yahoo.com';  // servidor SMTP
+        $mail->Host = getenv('SMTP_HOST');
         $mail->SMTPAuth = true;
-        $mail->Username = 'equiposoportegestionmulticines@gmail.com';     // <-- CORREO
-        $mail->Password = 'crky edhq hhac gfbw';      // <-- CONTRASEÑA APP
+        $mail->Username = getenv('SMTP_USER');
+        $mail->Password = getenv('SMTP_PASS');
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
+        $mail->Port = getenv('SMTP_PORT');
 
         // REMITENTE
-        $mail->setFrom('equiposoportegestionmulticines@gmail.com', 'RodaVía - Registro');
+        $mail->setFrom(getenv('SMTP_USER'), 'RodaVía - Registro');
 
         // DESTINATARIO
         $mail->addAddress($email, $nombre);
