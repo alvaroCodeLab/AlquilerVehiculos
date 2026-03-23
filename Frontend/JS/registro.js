@@ -1,59 +1,86 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const registerForm = document.getElementById('registerForm');
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Obtener el formulario y el contenedor de mensajes
+    const form = document.getElementById('registerForm');
     const errorMessage = document.getElementById('errorMessage');
-    if (registerForm) {
-        registerForm.addEventListener('submit', async function name(e) {
-            e.preventDefault();
 
-            const nombre = document.getElementById('nombre').value;
-            const primerApellido = document.getElementById('primerApellido').value;
-            const segundoApellido = document.getElementById('segundoApellido').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const direccion = document.getElementById('direccion').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
+    // Si no existe el formulario, salir (evita errores en otras páginas)
+    if (!form) return;
 
-            if (password != confirmPassword) {
-                errorMessage.textContent = 'Las contraseñas no coinciden.';
-                errorMessage.style.display = 'block';
-                return;
-            }
+    // Evento al enviar el formulario
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Evita recarga de página
 
-            var datosUsuario = {
-                nombre: nombre,
-                primerApellido: primerApellido,
-                segundoApellido: segundoApellido,
-                email: email,
-                telefono: telefono,
-                direccion: direccion,
-                password: password,
-                confirmPassword: confirmPassword
-            }
+        // Recoger y limpiar los datos del formulario
+        const datos = {
+            nombre: document.getElementById('nombre').value.trim(),
+            primerApellido: document.getElementById('primerApellido').value.trim(),
+            segundoApellido: document.getElementById('segundoApellido').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            telefono: document.getElementById('telefono').value.trim(),
+            direccion: document.getElementById('direccion').value.trim(),
+            password: document.getElementById('password').value,
+            confirmPassword: document.getElementById('confirmPassword').value
+        };
 
-            const requestOptions = {
+        // ✅ Validación básica: comprobar que las contraseñas coinciden
+        if (datos.password !== datos.confirmPassword) {
+            mostrarError('Las contraseñas no coinciden');
+            return;
+        }
+
+        try {
+
+            // Enviar datos al backend en formato JSON
+            const response = await fetch('../../Backend/PHP/registro.php', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(datosUsuario)
-            }
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(datos)
+            });
 
+            // Leer respuesta como texto (por seguridad antes de parsear)
+            const text = await response.text();
+
+            let data;
             try {
-                const response = await fetch('../../Backend/PHP/registro.php', requestOptions);
-                const data = await response.json();
-
-                if (data.success) {
-                    window.location.href = '../HTML/login.html'
-                } else {
-                    errorMessage.textContent = data.message;
-                    errorMessage.style.display = 'block';
-                }
-            } catch (error) {
-                console.log('Ha ocurrido un error: ', error);
-                errorMessage.textContent = 'Ocurrió un error al procesar el registro, intentalo de nuevo más tarde.';
-                errorMessage.style.display = 'block';
+                // Intentar convertir la respuesta a JSON
+                data = JSON.parse(text);
+            } catch {
+                console.error("Respuesta inválida:", text);
+                throw new Error("Respuesta del servidor inválida");
             }
-        })
+
+            // Si el registro ha sido exitoso
+            if (data.success) {
+
+                mostrarExito('Registro completado correctamente');
+
+                // Esperar 2 segundos antes de redirigir al login
+                setTimeout(() => {
+                    window.location.href = '../HTML/login.html';
+                }, 2000);
+
+            } else {
+                mostrarError(data.message);
+            }
+
+        } catch (error) {
+            console.error(error);
+            mostrarError('Error de conexión con el servidor');
+        }
+    });
+
+    // Mostrar mensaje de error (rojo)
+    function mostrarError(msg) {
+        errorMessage.textContent = msg;
+        errorMessage.style.display = 'block';
+        errorMessage.classList.remove('success'); // quitar verde si lo tenía
     }
-})
+
+    // Mostrar mensaje de éxito (verde)
+    function mostrarExito(msg) {
+        errorMessage.textContent = msg;
+        errorMessage.style.display = 'block';
+        errorMessage.classList.add('success'); // activar estilo verde
+    }
+});

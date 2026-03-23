@@ -1,5 +1,9 @@
 <?php
 
+// ❌ SOLO DESARROLLO (en producción dejar en 0)
+ini_set('display_errors', 0);
+error_reporting(0);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -7,22 +11,68 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
-include('config.php');
-session_start();
+require 'config.php';
 
+session_start();
 header('Content-Type: application/json');
 
-$data = json_decode(file_get_contents('php://input'), true);
-$nombre = $data['nombre'];
-$primerApellido = $data['primerApellido'];
-$segundoApellido = $data['segundoApellido'];
-$email = $data['email'];
-$telefono = $data['telefono'];
-$direccion = $data['direccion'];
+// ✅ Solo POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+    exit;
+}
+
+// ✅ Leer JSON
+$rawInput = file_get_contents('php://input');
+$data = json_decode($rawInput, true);
+
+if (!$data) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Datos inválidos'
+    ]);
+    exit;
+}
+
+// ✅ Validación campos obligatorios
+$requiredFields = ['nombre', 'primerApellido', 'email', 'password'];
+
+foreach ($requiredFields as $field) {
+    if (empty($data[$field])) {
+        echo json_encode([
+            'success' => false,
+            'message' => "Falta el campo: $field"
+        ]);
+        exit;
+    }
+}
+
+// ✅ Sanitizar datos
+$nombre = trim($data['nombre']);
+$primerApellido = trim($data['primerApellido']);
+$segundoApellido = trim($data['segundoApellido'] ?? '');
+$email = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
+$telefono = trim($data['telefono'] ?? '');
+$direccion = trim($data['direccion'] ?? '');
 $password = $data['password'];
 
-$sql = "SELECT * FROM usuarios WHERE email = ?";
-$stmt = $conn->prepare($sql);
+if (!$email) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Email no válido'
+    ]);
+    exit;
+}
+
+// ✅ Comprobar si el email existe
+$stmt = $conn->prepare("SELECT 1 FROM usuarios WHERE email = ?");
+if (!$stmt) {
+    error_log("SELECT ERROR: " . $conn->error);
+    echo json_encode(['success' => false, 'message' => 'Error interno']);
+    exit;
+}
+
 $stmt->bind_param('s', $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -30,85 +80,123 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     echo json_encode([
         'success' => false,
-        'message' => 'El email ya está registrado.'
+        'message' => 'El email ya está registrado'
     ]);
     exit;
 }
 
-// Encriptar la contraseña
-$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+// ✅ Hash contraseña
+$passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-//Insertar usuario en la base de datos
-$sql = "INSERT INTO usuarios (nombre, primer_apellido, segundo_apellido, email, telefono, direccion, password, rol) VALUES (?, ?, ?, ?, ?, ?, ?, 'cliente')";
+// ✅ Insertar usuario
+$stmt = $conn->prepare("
+    INSERT INTO usuarios 
+    (nombre, primer_apellido, segundo_apellido, email, password, telefono, direccion, rol) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, 'cliente')
+");
 
-$stmt = $conn->prepare($sql);
+if (!$stmt) {
+    error_log("INSERT ERROR: " . $conn->error);
+    echo json_encode(['success' => false, 'message' => 'Error interno']);
+    exit;
+}
 
-$stmt->bind_param("sssssss", $nombre, $primerApellido, $segundoApellido, $email, $telefono, $direccion, $passwordHash);
+$stmt->bind_param(
+    "sssssss",
+    $nombre,
+    $primerApellido,
+    $segundoApellido,
+    $email,
+    $passwordHash,
+    $telefono,
+    $direccion
+);
 
-// Ejecutar e informar
+// =======================
+// 🚀 REGISTRO OK
+// =======================
 if ($stmt->execute()) {
 
-    // ---------------------------------------------
-    //  ENVIAR CORREO DE CONFIRMACIÓN
-    // ---------------------------------------------
-    $mail = new PHPMailer(true);
-
+    // =======================
+    // ✉️ EMAIL PROFESIONAL
+    // =======================
     try {
-        // SERVIDOR SMTP
+
+        $mail = new PHPMailer(true);
+
         $mail->isSMTP();
-        $mail->Host = getenv('SMTP_HOST');
+        $mail->Host = $SMTP_HOST;
         $mail->SMTPAuth = true;
-        $mail->Username = getenv('SMTP_USER');
-        $mail->Password = getenv('SMTP_PASS');
+        $mail->Username = $SMTP_USER;
+        $mail->Password = $SMTP_PASS;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = getenv('SMTP_PORT');
+        $mail->Port = $SMTP_PORT;
 
-        // REMITENTE
-        $mail->setFrom(getenv('SMTP_USER'), 'RodaVía - Registro');
-
-        // DESTINATARIO
+        $mail->setFrom($SMTP_USER, 'RodaVía');
         $mail->addAddress($email, $nombre);
 
-        // IMAGEN EN EL CORREO 
-        $mail->addEmbeddedImage('../../SRC/IMG/logoRodaVía-removebg-preview.png', 'logo');
-
-        // CONTENIDO HTML DEL CORREO
         $mail->isHTML(true);
-        $mail->Subject = 'Confirmación de Registro | RodaVía';
+        $mail->Subject = 'Bienvenido a RodaVía - Registro completado';
+
+        $safeNombre = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
+
         $mail->Body = "
-            <div style='font-family: Arial; padding: 20px;'>
-                <img src='cid:logo' style='width: 150px; margin-bottom: 20px;'>
+        <div style='font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f4; padding: 30px;'>
+            
+            <div style='max-width: 600px; margin: auto; background: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);'>
+                
+                <h2 style='color: #2B7A78; text-align: center; margin-bottom: 20px;'>
+                    ¡Bienvenido a RodaVía, $safeNombre!
+                </h2>
 
-                <h2 style='color: #2B7A78;'>¡Bienvenido a RodaVía, $nombre!</h2>
+                <p style='font-size: 16px; color: #333; line-height: 1.6;'>
+                    Tu registro se ha realizado correctamente 🎉
+                </p>
 
-                <p>Tu registro se ha realizado correctamente.</p>
+                <p style='font-size: 16px; color: #555; line-height: 1.6;'>
+                    A partir de ahora podrás:
+                </p>
 
-                <p>A partir de ahora podrás reservar vehículos, ver tus viajes, 
-                recibir ofertas y mucho más.</p>
+                <ul style='font-size: 15px; color: #555; line-height: 1.8; padding-left: 20px;'>
+                    <li>🚗 Reservar vehículos fácilmente</li>
+                    <li>📅 Consultar tus viajes y reservas</li>
+                    <li>💸 Recibir ofertas y promociones exclusivas</li>
+                    <li>⭐ Guardar tus vehículos favoritos</li>
+                </ul>
 
-                <p>Gracias por confiar en nosotros 🚗💨</p>
+                <p style='font-size: 16px; color: #333; margin-top: 20px;'>
+                    Gracias por confiar en nosotros 🚗💨
+                </p>
 
-                <hr style='margin-top: 30px;'>
-                <p style='font-size: 12px; color: #999;'>Este correo es automático. Por favor, no respondas.</p>
+                <hr style='margin: 30px 0; border: none; border-top: 1px solid #eee;'>
+
+                <p style='font-size: 12px; color: #999; text-align: center;'>
+                    Este correo ha sido enviado automáticamente. Por favor, no respondas a este mensaje.
+                </p>
+
             </div>
+
+        </div>
         ";
 
         $mail->send();
 
-        echo json_encode(['success' => true]);
     } catch (Exception $e) {
-
-        echo json_encode([
-            'success' => false,
-            'message' => 'Usuario creado, pero hubo un problema enviando la confirmación: ' . $mail->ErrorInfo
-        ]);
+        error_log("MAIL ERROR: " . $mail->ErrorInfo);
     }
+
+    echo json_encode(['success' => true]);
+
 } else {
+
+    error_log("DB ERROR: " . $conn->error);
+
     echo json_encode([
         'success' => false,
-        'message' => 'Error al registrar el usuario: ' . $conn->error
+        'message' => 'Error al registrar usuario'
     ]);
 }
 
 $stmt->close();
 $conn->close();
+exit;

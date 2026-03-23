@@ -234,6 +234,13 @@ button:hover {
   animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Variante éxito (verde) */
+#errorMessage.success {
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid #2ecc71;
+}
+
 /* Animación suave al aparecer */
 @keyframes fadeIn {
   from {
