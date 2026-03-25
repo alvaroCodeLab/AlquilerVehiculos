@@ -819,3 +819,454 @@ button.btn-delete:hover {
   padding: 10px; /* Menos padding = menos espacio visual */
   border-radius: 8px;
 }
+
+/* ========== GENERALES ========== */
+body {
+  margin: 0;
+  background: #1e1f22;
+  color: #f4f4f4;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.admin-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: 260px;
+  background: #141517;
+  border-right: 1px solid #2b2d31;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.logo img {
+  width: 100%;
+  filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.4));
+  margin-bottom: 30px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: #00b4d8;
+  color: #fff;
+}
+
+.logout {
+  margin-top: auto;
+  padding: 12px;
+  background: #ef233c;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.logout:hover {
+  background: #d90429;
+}
+
+/* ========== CONTENIDO ========== */
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  transition: 0.3s;
+}
+
+.panel-section {
+  display: none;
+}
+.panel-section.active {
+  display: block;
+}
+
+/* ===== CARDS ===== */
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ===== WIDGETS MODERNOS (PANEL GENERAL) ===== */
+.stat-widgets {
+  display: grid;
+  grid-template-columns: 260px 1fr 320px;
+  gap: 18px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+.widget-card {
+  background: linear-gradient(
+    180deg,
+    rgba(44, 47, 51, 0.95),
+    rgba(38, 40, 43, 0.9)
+  );
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+
+.widget-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  color: #e6eef6;
+}
+
+.top-vehiculos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.top-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.top-item .rank {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00b4d8, #0077a1);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.top-item .meta {
+  flex: 1;
+}
+.top-item .meta .model {
+  font-weight: 700;
+}
+.top-item .meta .count {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.card {
+  background: #2c2f33;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  text-align: center;
+  animation: fadeUp 0.5s ease;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ===== TABLAS ===== */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 12px;
+  background: #2c2f33;
+  border-bottom: 1px solid #444;
+}
+
+.btn-add {
+  background: #00b4d8;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-edit {
+  background: #4caf50;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-delete {
+  background: #ef233c;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+/* ===== CHARTS ===== */
+.charts {
+  margin-top: 40px;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+canvas {
+  background: #2c2f33;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Animación */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========= THEME ========= */
+body.claro {
+  background: #f4f4f4;
+  color: #222;
+}
+body.claro .sidebar {
+  background: #fff;
+}
+body.claro .card,
+body.claro canvas,
+body.claro .tabla th,
+body.claro .tabla td {
+  background: #fff;
+  color: #000;
+}
+
+/* ========= TOGGLE SWITCH ========= */
+.tema-toggle {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  inset: 0;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #00b4d8;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* ========= MODAL GLOBAL ========= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 9999;
+  overflow-y: auto;
+}
+
+/* ========= MODAL CONTENIDO ADAPTABLE ========= */
+.modal-content {
+  background: #2f3136;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 18px;
+  padding: 26px;
+  animation: fadeUp 0.25s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* GRID del formulario */
+#formVehiculo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px 20px;
+}
+
+/* Campos */
+#formVehiculo input,
+#formVehiculo select,
+#formVehiculo textarea {
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #3c3d40;
+  background: #1c1d20;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Textarea ocupa dos columnas */
+#descripcion {
+  grid-column: span 2;
+}
+
+/* Botonera */
+.form-buttons {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Botones */
+.modal button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ========= VERSIÓN RESPONSIVE ========= */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .stat-widgets {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 820px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100%;
+    z-index: 999;
+    transition: 0.3s;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .content {
+    padding: 20px;
+    overflow-x: hidden;
+  }
+}
+
+/* Vehículos y reservas grid adaptativo */
+@media (max-width: 720px) {
+  .vehiculos-grid {
+    grid-template-columns: 1fr;
+  }
+  .reservas-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-widgets {
+    grid-template-columns: 1fr;
+  }
+  .cards {
+    gap: 12px;
+  }
+  .charts canvas {
+    width: 100% !important;
+    height: 240px !important;
+  }
+}
+
+/* Tablas scroll horizontal */
+@media (max-width: 600px) {
+  .tabla {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .tabla th, .tabla td {
+    display: inline-block;
+  }
+
+  .vehiculos-toolbar, .reservas-toolbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filtro-grande {
+    width: 100%;
+  }
+}
+
+/* Optimización general */
+@media (max-width: 480px) {
+  .cards p {
+    font-size: 1.5rem;
+  }
+
+  .widget-card h4 {
+    font-size: 0.85rem;
+  }
+
+  .modal-content {
+    max-width: 90%;
+  }
+}
+

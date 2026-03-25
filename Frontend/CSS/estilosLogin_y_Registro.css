@@ -9,20 +9,20 @@
 body {
   font-family: "Poppins", sans-serif;
   background: linear-gradient(135deg, #41454826 0%, #e9f0f12a 100%);
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   display: flex;
   color: #f0f0f0;
 }
 
-/* Contenedor general (ocupa toda la pantalla) */
+/* Contenedor general */
 .login-wrapper {
   display: flex;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
-/* Imagen izquierda (70%) */
+/* Imagen izquierda */
 .login-image {
   flex: 7;
   background: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80")
@@ -30,7 +30,7 @@ body {
   position: relative;
 }
 
-/* Panel derecho (formulario, 30%) */
+/* Panel derecho (formulario) */
 .login-container {
   flex: 3;
   background: linear-gradient(160deg, #1e1f22, #2c2f33);
@@ -38,7 +38,7 @@ body {
   justify-content: center;
   align-items: center;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
-  color: #f5f5f5; /* texto claro sobre fondo oscuro */
+  color: #f5f5f5;
 }
 
 /* Contenido del formulario */
@@ -46,6 +46,10 @@ body {
   width: 85%;
   max-width: 420px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80%;
 }
 
 /* Logo */
@@ -64,14 +68,7 @@ body {
   filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45));
 }
 
-/* Título y subtítulo */
-.login-content h1 {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #00b4d8; /* azul brillante para resaltar sobre el fondo gris */
-  font-size: 2.5rem;
-}
-
+/* Subtítulo */
 .subtitle {
   color: #cccccc;
   margin-top: 0.5rem;
@@ -88,7 +85,6 @@ form {
   gap: 1rem;
 }
 
-/* Inputs */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -113,7 +109,7 @@ input:focus {
   background: #25272b;
 }
 
-/* Botón principal */
+/* Botón */
 button {
   padding: 1rem;
   border: none;
@@ -133,12 +129,14 @@ button:hover {
   box-shadow: 0 8px 18px rgba(0, 123, 255, 0.25);
 }
 
-/* Enlaces inferiores */
+/* Enlaces */
 .links {
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .links a {
@@ -152,54 +150,13 @@ button:hover {
   color: #4facfe;
 }
 
-/* Responsivo para móviles */
-@media (max-width: 900px) {
-  body {
-    flex-direction: column;
-  }
-
-  .login-wrapper {
-    flex-direction: column;
-  }
-
-  .login-image {
-    flex: none;
-    height: 40vh;
-  }
-
-  .login-container {
-    flex: none;
-    height: 60vh;
-    box-shadow: none;
-    background: #1e1f22;
-  }
-
-  .login-content {
-    width: 90%;
-    text-align: center;
-  }
-
-  .links {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-
-  .login-logo {
-    width: 75%;
-    max-width: 300px;
-    margin-bottom: 2rem;
-  }
-}
-
-/* Contenedor del formulario para limitar la altura */
+/* Contenedor del formulario scrollable */
 .form-wrapper {
-  max-height: 55vh; /* controla la altura visible del formulario */
-  overflow-y: auto; /* si hay más campos, se hace scroll interno */
-  padding-right: 5px; /* espacio para que el scroll no tape el contenido */
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 5px;
 }
 
-/* Personalización del scroll (opcional, estético) */
 .form-wrapper::-webkit-scrollbar {
   width: 6px;
 }
@@ -213,15 +170,7 @@ button:hover {
   background: transparent;
 }
 
-/* Ajuste para que el contenido total se centre igual que en login */
-.login-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 80%;
-}
-
-/* Contenedor para mensajes de error */
+/* Mensajes de error */
 #errorMessage {
   margin-top: 1rem;
   color: #ff4d4d;
@@ -230,18 +179,16 @@ button:hover {
   border-radius: 6px;
   padding: 0.8rem 1rem;
   font-size: 0.95rem;
-  display: none; /* Oculto por defecto */
+  display: none;
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Variante éxito (verde) */
 #errorMessage.success {
   color: #2ecc71;
   background: rgba(46, 204, 113, 0.1);
   border: 1px solid #2ecc71;
 }
 
-/* Animación suave al aparecer */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -250,5 +197,57 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login-image {
+    flex: none;
+    height: 35vh;
+  }
+
+  .login-container {
+    flex: none;
+    height: auto;
+    min-height: 65vh;
+    box-shadow: none;
+    background: #1e1f22;
+    padding: 2rem 1rem;
+  }
+
+  .login-content {
+    width: 95%;
+  }
+
+  .login-logo {
+    width: 70%;
+    max-width: 250px;
+    margin-bottom: 1.5rem;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  button {
+    font-size: 0.95rem;
+    padding: 0.8rem;
   }
 }

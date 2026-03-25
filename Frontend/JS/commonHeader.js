@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Cargar header
     fetch("../HTML/commonHeader.html")
         .then(res => res.text())
         .then(html => {
             document.body.insertAdjacentHTML("afterbegin", html);
+
             iniciarMenuResponsive();
             iniciarDropdownUsuario();
             cargarSesion();
             marcarEnlaceActivo();
-        });
+        })
+        .catch(err => console.error("Error cargando header:", err));
 });
 
 // ------------------------- SESIÓN -------------------------
@@ -21,7 +22,10 @@ function cargarSesion() {
             const cuenta = document.getElementById("linkCuenta");
             const emailBox = document.getElementById("userEmail");
 
-            if (!favoritos || !reservas || !cuenta) return;
+            if (!favoritos || !reservas || !cuenta || !emailBox) return;
+
+            const logoutLink = document.querySelector(".logout");
+            if (!logoutLink) return;
 
             if (d.logged) {
                 cuenta.href = "#";
@@ -29,35 +33,31 @@ function cargarSesion() {
                 favoritos.style.display = "block";
                 reservas.style.display = "block";
 
-                // Cambiar opción del menú
-                const logoutLink = document.querySelector(".logout");
                 logoutLink.textContent = "Cerrar sesión";
                 logoutLink.href = "#";
-                logoutLink.addEventListener("click", () => {
-                    // Realizar el logout
+
+                logoutLink.onclick = () => {
                     fetch("../../Backend/PHP/logout.php")
-                        .then(response => response.json())
+                        .then(r => r.json())
                         .then(data => {
                             if (data.success) {
-                                // Redirigir a la página de despedida después de cerrar sesión
                                 window.location.href = "../HTML/despedida.html";
                             }
                         });
-                });
+                };
+
             } else {
                 favoritos.style.display = "none";
                 reservas.style.display = "none";
                 emailBox.textContent = "Invitado";
 
-                // Cambiar opción del menú
-                const logoutLink = document.querySelector(".logout");
                 logoutLink.textContent = "Iniciar Sesión";
                 logoutLink.href = "../HTML/login.html";
             }
 
-            // recarga cada 10s
             setTimeout(cargarSesion, 10000);
-        });
+        })
+        .catch(err => console.error("Error sesión:", err));
 }
 
 // ------------------------- ENLACE ACTIVO -------------------------
@@ -78,7 +78,6 @@ function marcarEnlaceActivo() {
     const link = document.querySelector(`[data-page="${page}"]`);
     if (link) link.classList.add("active");
 
-    // persistencia
     localStorage.setItem("lastActive", page);
 }
 
@@ -87,26 +86,40 @@ function iniciarMenuResponsive() {
     const btn = document.getElementById("menuToggle");
     const nav = document.getElementById("navMenu");
 
-    btn.addEventListener("click", () => nav.classList.toggle("open"));
+    if (!btn || !nav) return;
 
-    nav.querySelectorAll("a").forEach(a =>
-        a.addEventListener("click", () => nav.classList.remove("open"))
-    );
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation(); // 🔥 importante
+        nav.classList.toggle("open");
+    });
+
+    nav.addEventListener("click", e => {
+        e.stopPropagation(); // 🔥 evita conflictos
+    });
+
+    document.addEventListener("click", () => {
+        nav.classList.remove("open");
+    });
 }
 
-// ------------------------- DROPDOWN DE USUARIO -------------------------
+// ------------------------- DROPDOWN -------------------------
 function iniciarDropdownUsuario() {
     const btn = document.getElementById("linkCuenta");
     const menu = document.getElementById("userDropdown");
 
+    if (!btn || !menu) return;
+
     btn.addEventListener("click", e => {
         e.preventDefault();
+        e.stopPropagation(); // 🔥 clave
         menu.classList.toggle("open");
     });
 
-    document.addEventListener("click", (e) => {
-        if (!menu.contains(e.target) && !btn.contains(e.target)) {
-            menu.classList.remove("open");
-        }
+    menu.addEventListener("click", e => {
+        e.stopPropagation(); // 🔥 evita cierre al clicar dentro
+    });
+
+    document.addEventListener("click", () => {
+        menu.classList.remove("open");
     });
 }

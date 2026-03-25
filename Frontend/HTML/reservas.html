@@ -1,20 +1,111 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <title>Reservar Vehículo</title>
 <link rel="stylesheet" href="../CSS/estilosIndex.css">
 <style>
-    .card {background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.08);max-width:850px;margin:20px auto;}
-    .veh-img {width:100%;height:260px;object-fit:cover;border-radius:10px;}
-    .row {display:flex;gap:22px;margin-top:15px;}
-    .col {flex:1;}
-    label {font-weight:600;margin-top:10px;display:block;}
-    input, select {width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-top:4px;}
-    .btn-primary {margin-top:18px;background:#0b3d91;color:white;padding:12px;border:none;border-radius:10px;width:100%;cursor:pointer;font-size:16px;}
-    .success, .error {margin:10px 0;padding:10px;border-radius:8px;font-weight:600;}
-    .success {background:#d1ffd6;color:#086e0a;}
-    .error {background:#ffd6d6;color:#9d0000;}
+    /* CARD */
+    .card {
+        background:#fff;
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 4px 20px rgba(0,0,0,0.08);
+        max-width:850px;
+        margin:20px auto;
+    }
+
+    .veh-img {
+        width:100%;
+        height:260px;
+        object-fit:cover;
+        border-radius:10px;
+    }
+
+    .row {
+        display:flex;
+        gap:22px;
+        margin-top:15px;
+    }
+
+    .col {
+        flex:1;
+    }
+
+    label {
+        font-weight:600;
+        margin-top:10px;
+        display:block;
+    }
+
+    input, select {
+        width:100%;
+        padding:10px;
+        border-radius:8px;
+        border:1px solid #ccc;
+        margin-top:4px;
+    }
+
+    .btn-primary {
+        margin-top:18px;
+        background:#0b3d91;
+        color:white;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        width:100%;
+        cursor:pointer;
+        font-size:16px;
+    }
+
+    .success, .error {
+        margin:10px 0;
+        padding:10px;
+        border-radius:8px;
+        font-weight:600;
+    }
+
+    .success {
+        background:#d1ffd6;
+        color:#086e0a;
+    }
+
+    .error {
+        background:#ffd6d6;
+        color:#9d0000;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 820px) {
+        .row {
+            flex-direction: column;
+        }
+
+        .card {
+            padding: 15px;
+            margin: 15px;
+        }
+
+        .veh-img {
+            height:200px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .card {
+            padding: 12px;
+            margin: 10px;
+        }
+
+        .veh-img {
+            height:160px;
+        }
+
+        input, select, .btn-primary {
+            font-size: 14px;
+            padding: 8px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -105,12 +196,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 `;
 });
 
-// VALIDACIÓN → No permitir reservar una fecha de inicio anterior a HOY
+// VALIDACIÓN
 document.getElementById("formReserva").addEventListener("submit", async e => {
     e.preventDefault();
 
     const fd = new FormData(e.target);
-
     const fecha_inicio = fd.get("fecha_inicio");
     const hoy = new Date().toISOString().split("T")[0];
 
@@ -120,7 +210,6 @@ document.getElementById("formReserva").addEventListener("submit", async e => {
         return;
     }
 
-    // Enviar reserva al backend
     const r = await fetch("../../Backend/PHP/reservar.php", {
         method: "POST",
         body: fd

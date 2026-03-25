@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 
 <head>
@@ -7,7 +7,6 @@
   <title>RodaVía | Iniciar sesión</title>
   <link href="../../SRC/IMG/favicom/website_icon_white.png" rel="website icon" type="png">
   <link href="../CSS/estilosLogin_y_Registro.css" rel="stylesheet">
-  <!-- GSAP CDN para animaciones -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
 </head>
@@ -20,18 +19,18 @@
     <!-- Formulario derecha -->
     <div class="login-container">
       <div class="login-content">
-        <!-- Logo principal (sustituye el texto RodaVía) -->
         <img src="../../SRC/IMG/logoRodaVía-removebg-preview.png" alt="Logo RodaVía" class="login-logo">
 
         <p class="subtitle">Alquila tu auto ideal en minutos</p>
 
-        <form id="loginForm">
-          <input type="email" id="email" placeholder="Correo electrónico" required />
-          <input type="password" id="password" placeholder="Contraseña" required />
-          <button type="submit">Iniciar Sesión</button>
-        </form>
+        <div class="form-wrapper">
+          <form id="loginForm">
+            <input type="email" id="email" placeholder="Correo electrónico" required />
+            <input type="password" id="password" placeholder="Contraseña" required />
+            <button type="submit">Iniciar Sesión</button>
+          </form>
+        </div>
 
-        <!-- Contenedor de mensajes de error -->
         <div id="errorMessage"></div>
 
         <div class="links">
@@ -40,7 +39,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <script src="../JS/login.js"></script>
